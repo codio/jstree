@@ -21,6 +21,10 @@
     if($.jstree.plugins.multiline) { return; }
 
     $.jstree.plugins.multiline = function (options, parent) {
+        this.edit = function (obj, default_text, callback) {
+          parent.edit.apply(this, arguments);
+          $(this.get_node(obj, true).find('.jstree-item-text')[0]).remove();
+        };
         this.redraw_node = function(obj, deep, callback, force_render) {
             obj = parent.redraw_node.apply(this, arguments);
             if(obj) {
